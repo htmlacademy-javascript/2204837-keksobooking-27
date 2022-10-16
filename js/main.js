@@ -1,3 +1,4 @@
+const AD_COUNT = 10;
 const APARTMENT_TYPE = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const CHECK_TIME = ['12:00', '13:00', '14:00'];
 const APARTMENT_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
@@ -43,7 +44,7 @@ getRandomCoordinates(1.1,1.2,3);
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0,elements.length - 1)];
 
-// использовать Сет а не массив
+// на будущее посмотреть Set
 
 function getUniqItemsFromArray(elements) {
   const result = [];
@@ -56,7 +57,7 @@ function getUniqItemsFromArray(elements) {
   return result;
 }
 
-const createTestData = (n) => ({
+const createAdData = (n) => ({
   author: {
     avatar: `img/avatars/user${n < 10 ? '0'.concat(n) : n}.png`
   },
@@ -78,5 +79,7 @@ const createTestData = (n) => ({
     lng : getRandomCoordinates(139.7,139.8,5)
   }
 });
+// eslint-disable-next-line no-unused-vars
+const generateData = Array.from({length: AD_COUNT}, (v, i) => createAdData(i + 1));
 
-const generateData = Array.from({length: 10}, (v, i) => createTestData(i + 1));
+// console.log(generateData);
