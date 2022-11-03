@@ -27,7 +27,11 @@ adExample.forEach((ad) => {
       featuresListElement.remove();
     }
   });
-  adElement.querySelector('.popup__description').textContent = ad.order.description;
+  if (ad.order.description) {
+    adElement.querySelector('.popup__description').textContent = ad.order.description;
+  } else {
+    adElement.querySelector('.popup__description').classList.add('visually-hidden');
+  }
   const adPhotos = adElement.querySelector('.popup__photos');
   const adPhoto = adPhotos.querySelector('.popup__photo');
   adPhoto.src = ad.order.photos[0];
