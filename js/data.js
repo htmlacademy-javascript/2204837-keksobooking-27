@@ -1,7 +1,7 @@
 import {getRandomPositiveInteger, getRandomCoordinates, getUniqItemsFromArray, getRandomArrayElement} from './util.js';
 
 const AD_COUNT = 1;
-const APARTMENT_TYPE = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const APARTMENT_TYPE = ['palace', 'flat', 'house', 'bungalow', 'hotel',''];
 const CHECK_TIME = ['12:00', '13:00', '14:00'];
 const APARTMENT_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
@@ -15,6 +15,7 @@ const TEST_ADDRESS = ['Москва, ЦАО, р-н Арбат, Поварска�
   'Москва, ЗАО, р-н Филевский парк, ул. Василисы Кожиной, 13',
   'Москва, ВАО, р-н Преображенское, Краснобогатырская ул., 90С1',
   'Москва, ЦАО, р-н Мещанский, м. Трубная, переулок Печатников, 19С1',
+  '',
 ];
 const TEST_TITLE = ['Квартира в аренду',
   'Посуточная аренда',
