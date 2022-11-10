@@ -1,6 +1,17 @@
 const adForm = document.querySelector('.ad-form');
+const adType = document.querySelector('#type');
+const adPrice = document.querySelector('#price');
+const adTimeIn = document.querySelector('#timein');
+const adTimeOut = document.querySelector('#timeout');
 const titlePattern = /^[,a-zа-яё\s]{30,100}$/i;
 const pricePattern = /^[0-9]{1,6}$/;
+const minPrice = {
+  palace: 10000,
+  flat: 1000,
+  house: 5000,
+  bungalow: 0,
+  hotel: 3000,
+};
 
 const pristine = new Pristine (adForm, {
   classTo: 'ad-form__element',
@@ -19,7 +30,8 @@ const validateAdFormTitle = function (value) {
 };
 
 const validateAdFormPrice = function (value) {
-  return pricePattern.test(value) && value <= 100000;
+  //adPrice.placeholder = `от ${minPrice[adType.value]}`;
+  return pricePattern.test(value) && value >= minPrice[adType.value] && value <= 100000;
 };
 
 const validateAdFormRooms = function (value) {
@@ -76,4 +88,16 @@ adForm.addEventListener('submit', (evt) => {
   if(!isValid){
     //console.log('Форма невалидна');
   }
+});
+
+adType.addEventListener('change', () => {
+  adPrice.placeholder = `от ${minPrice[adType.value]}`;
+});
+
+adTimeIn.addEventListener ('change', () => {
+  adTimeOut.value = adTimeIn.value;
+});
+
+adTimeOut.addEventListener ('change', () => {
+  adTimeIn.value = adTimeOut.value;
 });
