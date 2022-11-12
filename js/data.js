@@ -1,6 +1,6 @@
 import {getRandomPositiveInteger, getRandomCoordinates, getUniqItemsFromArray, getRandomArrayElement} from './util.js';
 
-const AD_COUNT = 1;
+const AD_COUNT = 4;
 const APARTMENT_TYPE = ['palace', 'flat', 'house', 'bungalow', 'hotel',''];
 const CHECK_TIME = ['12:00', '13:00', '14:00'];
 const APARTMENT_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
@@ -8,14 +8,35 @@ const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/ke
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
-const TEST_ADDRESS = ['Москва, ЦАО, р-н Арбат, Поварская ул., 8/1к1',
-  'Москва, ЦАО, р-н Замоскворечье, Садовническая ул., 57С1',
-  'Москва, ЦАО, р-н Арбат, Поварская ул., 8/1к1',
-  'Москва, ЦАО, р-н Арбат, ул. Арбат, 24',
-  'Москва, ЗАО, р-н Филевский парк, ул. Василисы Кожиной, 13',
-  'Москва, ВАО, р-н Преображенское, Краснобогатырская ул., 90С1',
-  'Москва, ЦАО, р-н Мещанский, м. Трубная, переулок Печатников, 19С1',
-  '',
+const TEST_ADDRESS = [
+  {
+    lan: '35.77964',
+    lng: '139.54618',
+  },
+  {
+    lan: '35.81189',
+    lng: '139.96362',
+  },
+  {
+    lan: '35.70133',
+    lng: '139.86034',
+  },
+  {
+    lan: '35.72213',
+    lng: '139.99983',
+  },
+  {
+    lan: '35.71864',
+    lng: '139.32535',
+  },
+  {
+    lan: '35.72733',
+    lng: '139.59824',
+  },
+  {
+    lan: '35.59867',
+    lng: '139.67915',
+  },
 ];
 const TEST_TITLE = ['Квартира в аренду',
   'Посуточная аренда',
