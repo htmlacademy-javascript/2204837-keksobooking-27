@@ -1,3 +1,7 @@
+import {postAd} from './api.js';
+import {resetMap} from './map.js';
+import {disableSubmitButton} from './util.js';
+
 const adForm = document.querySelector('.ad-form');
 const adType = document.querySelector('#type');
 const adPrice = document.querySelector('#price');
@@ -30,7 +34,6 @@ const validateAdFormTitle = function (value) {
 };
 
 const validateAdFormPrice = function (value) {
-  //adPrice.placeholder = `от ${minPrice[adType.value]}`;
   return pricePattern.test(value) && value >= minPrice[adType.value] && value <= 100000;
 };
 
@@ -84,10 +87,17 @@ pristine.addValidator(
 
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
+
   const isValid = pristine.validate();
-  if(!isValid){
-    //console.log('Форма невалидна');
+  if(isValid){
+    disableSubmitButton();
+    const formData = new FormData(evt.target);
+    postAd(formData,evt);
   }
+});
+
+adForm.addEventListener('reset', () => {
+  resetMap();
 });
 
 adType.addEventListener('change', () => {

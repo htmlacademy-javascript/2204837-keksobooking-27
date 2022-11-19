@@ -1,4 +1,4 @@
-import {generateData} from './data.js';
+// import {generateData} from './data.js';
 import {createPhotoList, createFeatureList, createAdressContent, createTextContent} from './util.js';
 import {enabledForm} from './form-status.js';
 
@@ -59,29 +59,46 @@ const createCustomPopup = function (ad) {
   const adTemplate = document.querySelector('#card').content.querySelector('.popup');
   const popupElement = adTemplate.cloneNode('true');
   createTextContent(popupElement,'popup__avatar',ad.author.avatar);
-  createTextContent(popupElement,'popup__title',ad.order.title);
-  createAdressContent(popupElement,'popup__text--address',ad.order.address);
-  createTextContent(popupElement,'popup__type',apType[ad.order.type]);
-  createTextContent(popupElement,'popup__description',ad.order.description);
-  createTextContent(popupElement,'popup__text--price',`${ad.order.price} ₽/ночь`);
-  createTextContent(popupElement,'popup__text--capacity',`${ad.order.rooms} комнаты для ${ad.order.guests} гостей`);
-  createTextContent(popupElement,'popup__text--time',`Заезд после ${ad.order.checkin}, выезд до ${ad.order.checkout}`);
-  createFeatureList(popupElement,'popup__feature',ad.order.features);
-  createPhotoList(popupElement,'popup__photo',ad.order.photos);
+  createTextContent(popupElement,'popup__title',ad.offer.title);
+  createAdressContent(popupElement,'popup__text--address',ad.offer.address);
+  createTextContent(popupElement,'popup__type',apType[ad.offer.type]);
+  createTextContent(popupElement,'popup__description',ad.offer.description);
+  createTextContent(popupElement,'popup__text--price',`${ad.offer.price} ₽/ночь`);
+  createTextContent(popupElement,'popup__text--capacity',`${ad.offer.rooms} комнаты для ${ad.offer.guests} гостей`);
+  createTextContent(popupElement,'popup__text--time',`Заезд после ${ad.offer.checkin}, выезд до ${ad.offer.checkout}`);
+  createFeatureList(popupElement,'popup__feature',ad.offer.features);
+  createPhotoList(popupElement,'popup__photo',ad.offer.photos);
   return popupElement;
 };
 
-generateData().forEach((element) => {
-  const adLan = element.order.address.lan;
-  const adLng = element.order.address.lng;
-  const pinMarker = L.marker(
-    {
-      lat: adLan,
-      lng: adLng,
-    },
-    {
-      icon: basicPinIcon,
-    }
-  );
-  pinMarker.addTo(markerAdGroup).bindPopup(createCustomPopup(element));
-});
+const renderData = (elements) => {
+  elements.forEach((element) => {
+    const adLat = element.location.lat;
+    const adLng = element.location.lng;
+    const pinMarker = L.marker(
+      {
+        lat: adLat,
+        lng: adLng,
+      },
+      {
+        icon: basicPinIcon,
+      }
+    );
+    pinMarker.addTo(markerAdGroup).bindPopup(createCustomPopup(element));
+  });
+};
+
+const resetMap = () => {
+  mainPinMarker.setLatLng({
+    lat: 35.689855,
+    lng: 139.753925
+  });
+  map.setView({
+    lat: 35.689855,
+    lng: 139.753925
+  }, 10);
+  map.closePopup();
+};
+
+export {renderData, resetMap};
+
