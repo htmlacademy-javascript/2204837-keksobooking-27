@@ -1,4 +1,3 @@
-// import {generateData} from './data.js';
 import {createPhotoList, createFeatureList, createAdressContent, createTextContent} from './util.js';
 import {enabledForm} from './form-status.js';
 
@@ -71,7 +70,10 @@ const createCustomPopup = function (ad) {
   return popupElement;
 };
 
+const clearMarker = () => markerAdGroup.clearLayers();
+
 const renderData = (elements) => {
+  clearMarker();
   elements.forEach((element) => {
     const adLat = element.location.lat;
     const adLng = element.location.lng;

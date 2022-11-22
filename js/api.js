@@ -1,11 +1,18 @@
 import {renderData, resetMap} from './map.js';
 import {showMessage} from './messages.js';
 import {showAlert,enableSubmitButton} from './util.js';
+import {getFilteredOffers,setOnFilterChange} from './filter.js';
+import {debounce} from './debounce.js';
 
 const getAds = function () {
   fetch('https://27.javascript.pages.academy/keksobooking/data')
-    .then((response) => response.json())
-    .then((ads) => renderData(ads))
+    .then(
+      (response) => response.json())
+    .then((ads) => {
+      getFilteredOffers(ads);
+      renderData(ads.slice(0,10));
+      setOnFilterChange(debounce(() => renderData(getFilteredOffers(ads))));
+    })
     .catch(() => {showAlert('Ошибка загрузки объявлений..');});
 };
 
@@ -17,9 +24,8 @@ const postAd = function (formData,evt) {
     })
     .then((response) => {
       if (response.ok) {
-        // disableSubmitButton();
-        showMessage('success');//показать сообщение об успешной отправке
-        evt.target.reset();//очистака форм
+        showMessage('success');
+        evt.target.reset();
         resetMap();
         enableSubmitButton();
       } else {
@@ -29,7 +35,7 @@ const postAd = function (formData,evt) {
     })
     .catch(() => {
       showMessage('error');
-      enableSubmitButton();// показать сообщение об ошибке(сообщение исчезает по кнопке, esc, по нажатию на серое поле) ПОЛЯ НЕ УДАЛЯЮТСЯ
+      enableSubmitButton();
     });
 };
 
