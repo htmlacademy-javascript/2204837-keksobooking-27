@@ -47,11 +47,11 @@ const mainPinMarker = L.marker(
 mainPinMarker.addTo(markerMainGroup);
 
 mainPinMarker.on('moveend', (evt) => {
-  const adAdress = document.querySelector('#address');
+  const adAddress = document.querySelector('#address');
   const coord = evt.target.getLatLng();
   const lat = coord.lat.toFixed(5);
   const lng = coord.lng.toFixed(5);
-  adAdress.value = `${lat}, ${lng}`;
+  adAddress.value = `${lat}, ${lng}`;
 });
 
 const createCustomPopup = function (ad) {
