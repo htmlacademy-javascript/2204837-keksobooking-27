@@ -3,5 +3,7 @@ import './map.js';
 import './form-validation.js';
 import './slider.js';
 import {getAds} from './api.js';
+//import {setOnFilterChange} from './filter.js';
 
 getAds();
+

@@ -1,15 +1,15 @@
 import {isEscapeKey, isEnterKey, enableSubmitButton} from './util.js';
 
-const event = function () {
+const messageEvent = function () {
   if (isEscapeKey || isEnterKey) {
     document.body.lastChild.remove();
-    window.removeEventListener('keydown', event);
+    window.removeEventListener('keydown', messageEvent);
     enableSubmitButton();
   }
 };
 
 const addEvent = function () {
-  window.addEventListener('keydown', event);
+  window.addEventListener('keydown', messageEvent);
   window.onclick = () => document.body.lastChild.remove();
 };
 
