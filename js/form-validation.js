@@ -7,6 +7,11 @@ const adType = document.querySelector('#type');
 const adPrice = document.querySelector('#price');
 const adTimeIn = document.querySelector('#timein');
 const adTimeOut = document.querySelector('#timeout');
+const avatarElement = adForm.querySelector('.ad-form-header__input');
+const avatarPreview = adForm.querySelector('.ad-form-header__preview').querySelector('img');
+const imageElement = adForm.querySelector('#images');
+const imagePreviewBox = adForm.querySelector('.ad-form__photo');
+const offerFormPhoto = adForm.querySelector('.ad-form__input');
 const titlePattern = /^[,a-zа-яё\s]{30,100}$/i;
 const pricePattern = /^[0-9]{1,6}$/;
 const minPrice = {
@@ -16,6 +21,8 @@ const minPrice = {
   bungalow: 0,
   hotel: 3000,
 };
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+const DEFAULT_AVATAR = 'img/muffin-grey.svg';
 
 const pristine = new Pristine (adForm, {
   classTo: 'ad-form__element',
@@ -96,8 +103,39 @@ adForm.addEventListener('submit', (evt) => {
   }
 });
 
+const isValidType = (file) => {
+  const fileName = file.name.toLowerCase();
+  return FILE_TYPES.some((it) => fileName.endsWith(it));
+};
+
+const onAvatarChange = () => {
+  const file = avatarElement.files[0];
+  if (file && isValidType(file)){
+    avatarPreview.src = URL.createObjectURL(file);
+  }
+};
+
+const onImageChange = () => {
+  const file = imageElement.files[0];
+
+  if(file && isValidType(file)) {
+    imagePreviewBox.innerHTML = '';
+    const image = document.createElement('img');
+    image.src = URL.createObjectURL(file);
+    image.style.maxWidth = '100%';
+    image.style.height = 'auto';
+    imagePreviewBox.append(image);
+  }
+};
+
+const resetFormData = () => {
+  imagePreviewBox.innerHTML = '';
+  avatarPreview.src = DEFAULT_AVATAR;
+};
+
 adForm.addEventListener('reset', () => {
   resetMap();
+  resetFormData();
 });
 
 adType.addEventListener('change', () => {
@@ -111,3 +149,6 @@ adTimeIn.addEventListener ('change', () => {
 adTimeOut.addEventListener ('change', () => {
   adTimeIn.value = adTimeOut.value;
 });
+
+offerFormPhoto.addEventListener('change', onImageChange);
+avatarElement.addEventListener('change', onAvatarChange);

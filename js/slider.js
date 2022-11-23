@@ -6,7 +6,7 @@ noUiSlider.create(adPriceSlider, {
     min: 0,
     max: 100000,
   },
-  start: 5000,
+  start: 0,
   step: 1,
   format: {
     to: function (value) {
