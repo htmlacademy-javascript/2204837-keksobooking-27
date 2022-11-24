@@ -3,6 +3,7 @@ import {resetMap} from './map.js';
 import {disableSubmitButton} from './util.js';
 
 const adForm = document.querySelector('.ad-form');
+const adPriceSlider = document.querySelector('.ad-form__slider');
 const adType = document.querySelector('#type');
 const adPrice = document.querySelector('#price');
 const adTimeIn = document.querySelector('#timein');
@@ -36,15 +37,11 @@ Pristine.addMessages('ru', {
 
 Pristine.setLocale('ru');
 
-const validateAdFormTitle = function (value) {
-  return titlePattern.test(value);
-};
+const validateAdFormTitle = (value) => titlePattern.test(value);
 
-const validateAdFormPrice = function (value) {
-  return pricePattern.test(value) && value >= minPrice[adType.value] && value <= 100000;
-};
+const validateAdFormPrice = (value) => pricePattern.test(value) && value >= minPrice[adType.value] && value <= 100000;
 
-const validateAdFormRooms = function (value) {
+const validateAdFormRooms = (value) => {
   const select = adForm.querySelector('#capacity');
   switch(value){
     case '1':
@@ -58,7 +55,7 @@ const validateAdFormRooms = function (value) {
   }
 };
 
-const validateAdFormCapacity = function (value) {
+const validateAdFormCapacity = (value) => {
   const rooms = adForm.querySelector('#room_number');
   const countRooms = Number(rooms.value);
   if (Number(value) !== 0) {
@@ -89,7 +86,7 @@ pristine.addValidator(
 pristine.addValidator(
   adForm.querySelector('#price'),
   validateAdFormPrice,
-  'До 100000 ₽/ночь'
+  'Указана некорректная цена'
 );
 
 adForm.addEventListener('submit', (evt) => {
@@ -140,6 +137,13 @@ adForm.addEventListener('reset', () => {
 
 adType.addEventListener('change', () => {
   adPrice.placeholder = `от ${minPrice[adType.value]}`;
+  adPriceSlider.noUiSlider.updateOptions({
+    range: {
+      'min': Number(minPrice[adType.value]),
+      'max': 100000
+    }
+  });
+  adPriceSlider.noUiSlider.set(Number(minPrice[adType.value]));
 });
 
 adTimeIn.addEventListener ('change', () => {

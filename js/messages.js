@@ -1,6 +1,6 @@
 import {isEscapeKey, isEnterKey, enableSubmitButton} from './util.js';
 
-const messageEvent = function () {
+const messageEvent = () => {
   if (isEscapeKey || isEnterKey) {
     document.body.lastChild.remove();
     window.removeEventListener('keydown', messageEvent);
@@ -8,12 +8,12 @@ const messageEvent = function () {
   }
 };
 
-const addEvent = function () {
+const addEvent = () => {
   window.addEventListener('keydown', messageEvent);
   window.onclick = () => document.body.lastChild.remove();
 };
 
-const showMessage = function (className) {
+const showMessage = (className) => {
   const template = document.querySelector(`#${className}`).content.querySelector(`.${className}`);
   const element = template.cloneNode('true');
   document.body.appendChild(element);

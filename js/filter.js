@@ -46,10 +46,10 @@ const getFilteredOffers = (offers) => {
   const selectedRooms = housingRoomsField.value;
   const selectedGuests = housingGuestsField.value;
 
-  const selectedFueters = [];
+  const selectedFeature = [];
   featureCheckboxs.forEach((checkbox) => {
     if (checkbox.checked) {
-      selectedFueters.push(checkbox.value);
+      selectedFeature.push(checkbox.value);
     }
   });
 
@@ -63,7 +63,7 @@ const getFilteredOffers = (offers) => {
       filterByPrice(offer, selectedPrece) &&
       filterByRooms(offer, selectedRooms) &&
       filterByGuests(offer, selectedGuests) &&
-      filterByFeatures(offer,selectedFueters)
+      filterByFeatures(offer,selectedFeature)
     )
     {
       filteredOffers.push(offer);
@@ -76,4 +76,4 @@ const setOnFilterChange = (cb) => {
   filterElement.addEventListener('change', () => cb ());
 };
 
-export {setOnFilterChange, getFilteredOffers};
+export {setOnFilterChange, getFilteredOffers, OFFERS_COUNT};
