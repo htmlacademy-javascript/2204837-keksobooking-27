@@ -4,7 +4,7 @@ const filterForm = document.querySelector('.map__filters');
 const interactiveFilterElements = filterForm.querySelectorAll('.map__filter');
 const slider = adForm.querySelector('.ad-form__slider');
 
-const disabledForm = function () {
+const disabledForm = () => {
   filterForm.classList.add('map__filters--disabled');
   interactiveFilterElements.forEach((element) => element.setAttribute('disabled', 'disabled'));
   adForm.classList.add('ad-form--disabled');
@@ -14,14 +14,12 @@ const disabledForm = function () {
 
 disabledForm();
 
-const enabledForm = function() {
+const enabledForm = () => {
   filterForm.classList.remove('map__filters--disabled');
   interactiveFilterElements.forEach((element) => element.removeAttribute('disabled'));
   adForm.classList.remove('ad-form--disabled');
   interactiveAdElements.forEach((element) => element.removeAttribute('disabled'));
   slider.removeAttribute('disabled');
 };
-
-// enabledForm();
 
 export {enabledForm,disabledForm};

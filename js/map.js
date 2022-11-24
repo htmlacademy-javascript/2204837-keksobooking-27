@@ -1,4 +1,4 @@
-import {createPhotoList, createFeatureList, createAdressContent, createTextContent} from './util.js';
+import {createPhotoList, createFeatureList, createTextContent} from './util.js';
 import {enabledForm} from './form-status.js';
 
 const apType = {
@@ -54,12 +54,12 @@ mainPinMarker.on('moveend', (evt) => {
   adAddress.value = `${lat}, ${lng}`;
 });
 
-const createCustomPopup = function (ad) {
+const createCustomPopup = (ad) => {
   const adTemplate = document.querySelector('#card').content.querySelector('.popup');
   const popupElement = adTemplate.cloneNode('true');
   createTextContent(popupElement,'popup__avatar',ad.author.avatar);
   createTextContent(popupElement,'popup__title',ad.offer.title);
-  createAdressContent(popupElement,'popup__text--address',ad.offer.address);
+  createTextContent(popupElement,'popup__text--address',ad.offer.address);
   createTextContent(popupElement,'popup__type',apType[ad.offer.type]);
   createTextContent(popupElement,'popup__description',ad.offer.description);
   createTextContent(popupElement,'popup__text--price',`${ad.offer.price} ₽/ночь`);

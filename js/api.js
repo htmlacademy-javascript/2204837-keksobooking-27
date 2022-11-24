@@ -1,7 +1,7 @@
 import {renderData, resetMap} from './map.js';
 import {showMessage} from './messages.js';
-import {showAlert,enableSubmitButton} from './util.js';
-import {getFilteredOffers,setOnFilterChange} from './filter.js';
+import {showAlert, enableSubmitButton} from './util.js';
+import {getFilteredOffers, setOnFilterChange, OFFERS_COUNT} from './filter.js';
 import {debounce} from './debounce.js';
 
 const getAds = function () {
@@ -10,7 +10,7 @@ const getAds = function () {
       (response) => response.json())
     .then((ads) => {
       getFilteredOffers(ads);
-      renderData(ads.slice(0,10));
+      renderData(ads.slice(0,OFFERS_COUNT));
       setOnFilterChange(debounce(() => renderData(getFilteredOffers(ads))));
     })
     .catch(() => {showAlert('Ошибка загрузки объявлений..');});
